@@ -26,17 +26,14 @@ Meant as a starting point for discussion and dialogue :)
 - Never nest more than two levels deep
 - Never use ID's for styling
 - Use Autoprefixr to handle vendors prefixes instead of libraries
-- Avoid using Compass at all for more independent SCSS. overflow: hidden is as easy to write as @include clearfix;
-- Whitespace nazi. Two spaces, space before opening brace, no newlines between closing braces in nestings
-
-
+- Indent with two spaces, space before opening brace, no newlines between closing braces in nestings
 
 ### File naming and ordering
 
 *This is loosely based on atomic naming and the current setup we use in Rails projects*
 
 - `/base` holds variables, fonts, typography and other element level styling
-- `/blocks` holds small, reusable parts like buttons, image + caption, lists, tables, …
+- `/bricks` holds small, reusable parts like buttons, image + caption, lists, tables, …
 - `/modules` holds bigger, more specific parts that are made up from multiple blocks and elements with additional styling 
 - `/layouts` is for view-specific styling and layouting
 
@@ -53,17 +50,18 @@ block__element--modifier
 
 block      is the name of the block/module
 element    is a describing name of the role the element plays inside the block/module
-modifier   indicates state
+modifier   indicates modifications on the default state
 ```
 
 Prefixes: 
 
-- Blocks don't get a prefix as they are used more often
-- Modules get a `mod-` prefix for the most top level element. This allows some element styling in emergency cases.
+- Bricks don't get a prefix as they are used more often
+- Modules get a `mod-` prefix for the containing element, this allows some element styling in emergency cases; elements inside get named according to BEM without a prefix
 - Layouts get a `l-` prefix 
 - Pure Javascript classes get a `js-` prefix for clarity and are forbidden in SCSS files
+- States get an `is-` prefix. The line between this and a modifier is small but open for discussion.
 
-Layouts are always specified with a class on the HTML element, in most cases `l-slug-of-current-view`.
+Layouts are always specified with a class on the body element, in most cases `l-slug-of-current-view`.
 
 ### Yeah, but why
 
@@ -207,5 +205,3 @@ Only thing I didn't like from the start: double underscore `__` and dash `--` ta
 ### In the wild
 
 Lots of people this kind of approach. I used this 1:1 on http://panteca.io/ which was a rapidly evolving and forever changing project and BEM proved to keep up. It allowed for some quick drafting and nice refactoring without breaking other things by accident. The code was readable and understandable for the other developer who worked on this on the side (once a week tops).
-
-It survived HackerNews frontpage :-)
