@@ -1,4 +1,4 @@
-## SCSS
+# SCSS
 
 - Use a mobile first approach
 - Never nest more than two levels deep
