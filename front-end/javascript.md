@@ -22,44 +22,35 @@ There's so much already written about this that it'd be a waste of time to do it
 
 // modules/tabs.module.js
 
-var Tabs;
+exports = Tabs;
 
-exports.Tabs = Tabs;
+function Tabs($element, options) {
+  this.$element = $element;
+  
+  // Initialize all properties
+  // Those that cannot be initialized here should still be listed
+  // but set to the null-value of their type (empty array, empty string, 0, false or null)
+  
+  this.init().bind();
+}
 
-Tabs = (function () {
-  "use strict";
+Tabs.prototype.init = function () {
+  // Do more extensive initialization
+  return this;
+};
 
-  function Tabs ($element, options) {
-    this.$element = $element;
+Tabs.prototype.bind = function () {
+  // Bind all handlers
+  return this;
+};
 
-    // Initialize all properties
-    // Those that cannot be initialized here should still be listed
-    // but set to the null-value of their type (empty array, empty string, 0, false or null)
+Tabs.prototype.destroy = function () {
+  // Clean up after yourself
+  return this;
+};
 
-    this.init().bind();
-  }
-
-  Tabs.prototype.init = function () {
-    // Do more extensive initialization
-    return this;
-  };
-
-  Tabs.prototype.bind = function () {
-    // Bind all handlers
-    return this;
-  };
-
-  Tabs.prototype.destroy = function () {
-    // Clean up after yourself
-    return this;
-  };
-
-  Tabs.prototype.unbind = function () {
-    // Remove all handlers
-    return this;
-  };
-
-  return Tabs;
-
-}());
+Tabs.prototype.unbind = function () {
+  // Remove all handlers
+  return this;
+};
 ```
