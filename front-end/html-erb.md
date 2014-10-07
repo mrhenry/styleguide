@@ -8,7 +8,7 @@
 ```html+erb
 <ul>
   <% items.each do |item| %>
-    <li><%= item.title %>
+    <li><%= item.title %></li>
   <% end %>
 </ul>
 ```
