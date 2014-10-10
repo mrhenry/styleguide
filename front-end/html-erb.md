@@ -14,4 +14,4 @@
 ```
 
 - Try to work as abstract as possible, building everything in small partials; small differences can then be done with inline if-statements and adding classes e.g.
-- If variables need some processing in the view, do it in its own block at the top of the file or at the beginning of the loop.
+- Variable processing inside a loop or partial: Write a helper, at the top of the partial file, at the beginning of the loop
