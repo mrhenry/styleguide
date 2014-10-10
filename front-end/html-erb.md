@@ -14,4 +14,4 @@
 ```
 
 - Try to work as abstract as possible, building everything in small partials; small differences can then be done with inline if-statements and adding classes e.g.
-- Variable processing inside a loop or partial: Write a helper, at the top of the partial file, at the beginning of the loop
+- Variable processing inside a loop or partial options: Write a helper, write at the top of the partial file, write at the beginning of the loop
