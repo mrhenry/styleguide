@@ -1,7 +1,8 @@
 # SCSS
 
 - Use a mobile first approach
-- Never nest more than two levels deep
+- Never nest more than three levels deep
+- We switched from Compass to [Bourbon](http://bourbon.io) 
 - Never use ID's for styling
 - Use Autoprefixr to handle vendors prefixes instead of libraries
 - Indent with two spaces, space before opening brace, no newlines between closing braces in nestings
@@ -12,8 +13,8 @@
 
 - `/base` holds variables, fonts, typography and other element level styling
 - `/bricks` holds small, reusable parts like buttons, image + caption, lists, tables, …
-- `/modules` holds bigger, more specific parts that are made up from multiple blocks and elements with additional styling
 - `/layouts` is for view-specific styling and layouting
+- `/modules` holds bigger, more specific parts that are made up from multiple blocks and elements with additional styling
 
 In Rails projects, modules should have a corresponding partial while layouts are a view on their own (most of the time).
 
@@ -24,11 +25,10 @@ A nice idea I've been having is `_inbox.css.scss` that gets imported last in the
 We use the BEM naming syntax with a slightly different approach.
 
 ```
-block__element--modifier
+block__element.with-modifier
 
 block      is the name of the block/module
 element    is a describing name of the role the element plays inside the block/module
-modifier   indicates modifications on the default state
 ```
 
 Prefixes:
@@ -40,6 +40,10 @@ Prefixes:
 - States get an `is-` prefix. The line between this and a modifier is small but open for discussion.
 
 Layouts are always specified with a class on the body element, in most cases `l-slug-of-current-view`.
+
+Modifiers:
+
+Prefix modifier classes like as-modifier, has-modifier, with-modifier, is-modifier so it's clear that this class is used to modify your brick or module.
 
 ### Yeah, but why
 
@@ -115,7 +119,7 @@ Now, take BEM.
       <li class="nav__item"><a href="#">Home</a></li>
       <li class="nav__item"><a href="#">About</a></li>
       <li class="nav__item nav__item subnav__container">
-        <a href="#" class="subnav__togle js-subnav__toggle">Products</a>
+        <a href="#" class="subnav__toggle js-subnav__toggle">Products</a>
         <ul class="mod-subnav">
           <li class="subnav__item"><a href="#">Home</a></li>
           <li class="subnav__item"><a href="#">About</a></li>
