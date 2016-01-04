@@ -4,6 +4,6 @@ This styleguide is meant as a guideline for front-end development over at [Mr. H
 
 ## Languages
 
- - [HTML / ERB / Rails views](front-end/html-erb.md)
+ - [HTML](front-end/html.md)
  - [SCSS](front-end/scss.md)
- - [Javascript](front-end/javascript.md)
+ - [Javascript / Angular](front-end/javascript.md)

@@ -2,7 +2,7 @@
 
 - Use a mobile first approach
 - Never nest more than three levels deep
-- We switched from Compass to [Bourbon](http://bourbon.io) 
+- We switched from Compass to [Bourbon](http://bourbon.io)
 - Never use ID's for styling
 - Use Autoprefixr to handle vendors prefixes instead of libraries
 - Indent with two spaces, space before opening brace, no newlines between closing braces in nestings
@@ -12,11 +12,9 @@
 *This is loosely based on atomic naming and the current setup we use in Rails projects*
 
 - `/base` holds variables, fonts, typography and other element level styling
-- `/bricks` holds small, reusable parts like buttons, image + caption, lists, tables, …
+- `/modules` holds all separate parts (either small like buttons or one-time use like header search element)
 - `/layouts` is for view-specific styling and layouting
-- `/modules` holds bigger, more specific parts that are made up from multiple blocks and elements with additional styling
-
-In Rails projects, modules should have a corresponding partial while layouts are a view on their own (most of the time).
+- `/themes` is when a specific view can have multiple variations (in colours or fonts)
 
 A nice idea I've been having is `_inbox.css.scss` that gets imported last in the `application.css.scss` so that back-end developers or someone not familiar with the front-end architecture can get his styles working to do his work and leave it to the front-end developer to merge the styles in nicely in the set up architecture. You're even allowed to use `!important` in this file :-)
 
@@ -33,17 +31,15 @@ element    is a describing name of the role the element plays inside the block/m
 
 Prefixes:
 
-- Bricks don't get a prefix as they are used more often
-- Modules get a `mod-` prefix for the containing element, this allows some element styling in emergency cases; elements inside get named according to BEM without a prefix
+- Modules don't get a prefix
 - Layouts get a `l-` prefix
-- Pure Javascript classes get a `js-` prefix for clarity and are forbidden in SCSS files
-- States get an `is-` prefix. The line between this and a modifier is small but open for discussion.
+- States get an `is-` or `has-` prefix. The line between this and a modifier is small but open for discussion.
 
 Layouts are always specified with a class on the body element, in most cases `l-slug-of-current-view`.
 
 Modifiers:
 
-Prefix modifier classes like as-modifier, has-modifier, with-modifier, is-modifier so it's clear that this class is used to modify your brick or module.
+Prefix modifier classes like `as-modifier`, `has-modifier`, `with-modifier`, `is-modifier` so it's clear that this class is used to modify your brick or module.
 
 ### Yeah, but why
 
@@ -104,7 +100,7 @@ First, it makes your code a lot easier to dive in to as a new person. Take an na
 
 Problems with that:
 
-- Subnavigation li and a will inherit from the main navigation which you probably don't want, so you'll be overwriting a lot of extra code and behaviour.
+- Subnavigation `li` and `a` will inherit from the main navigation which you probably don't want, so you'll be overwriting a lot of extra code and behaviour.
 - Styling is dependent on your DOM. What if for some reason you want to change up your markup to a div with some spans? There's no reason for that in this usecase but think about an image container with caption.
 
 Now, take BEM.
@@ -113,14 +109,14 @@ Now, take BEM.
 
 <!-- partials/_header.html.erb -->
 
-<header class="mod-header">
-  <nav class="mod-nav">
+<header class="header">
+  <nav class="nav">
     <ul class="nav__primary">
       <li class="nav__item"><a href="#">Home</a></li>
       <li class="nav__item"><a href="#">About</a></li>
       <li class="nav__item nav__item subnav__container">
-        <a href="#" class="subnav__toggle js-subnav__toggle">Products</a>
-        <ul class="mod-subnav">
+        <a href="#" class="subnav__toggle" ng-click="page.toggleSubnavigation()">Products</a>
+        <ul class="subnav">
           <li class="subnav__item"><a href="#">Home</a></li>
           <li class="subnav__item"><a href="#">About</a></li>
         </ul>
@@ -138,7 +134,7 @@ Now, take BEM.
 
 // modules/_header.css.scss
 
-.mod-header {
+.header {
   // Some styling, colors and what not, maybe make it fixed
 }
 ```
@@ -147,7 +143,7 @@ Now, take BEM.
 
 // modules/_nav.css.scss
 
-.mod-nav {
+.nav {
 
 }
 
@@ -172,7 +168,7 @@ Now, take BEM.
 
 // modules/_subnav.css.scss
 
-.mod-subnav {
+.subnav {
   // Background styling and animation logic
 
   .subnav__item { }
@@ -180,11 +176,3 @@ Now, take BEM.
 ```
 
 This has some clear benefits. Since we're never nested more than two classes deep, it's easy to override a style inside a `@media`-query without having to rebuild the whole nesting structure. Separation and abstraction makes it easy to confidently swap out or move around code you didn't write yourself. It's clear what everything does from the describing name you give to certain elements.
-
-### Bummers about BEM
-
-Only thing I didn't like from the start: double underscore `__` and dash `--` takes some getting used to but proves its worth for clarity.
-
-### In the wild
-
-Lots of people this kind of approach. I used this 1:1 on http://panteca.io/ which was a rapidly evolving and forever changing project and BEM proved to keep up. It allowed for some quick drafting and nice refactoring without breaking other things by accident. The code was readable and understandable for the other developer who worked on this on the side (once a week tops).
