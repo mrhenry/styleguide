@@ -2,10 +2,8 @@
 
 - Use a mobile first approach
 - Never nest more than three levels deep
-- We switched from Compass to [Bourbon](http://bourbon.io)
 - Never use ID's for styling
-- Use Autoprefixr to handle vendors prefixes instead of libraries
-- Indent with two spaces, space before opening brace, no newlines between closing braces in nestings
+- Indent with one tab, space before opening brace, no newlines between closing braces in nestings
 
 ### File naming and ordering
 
